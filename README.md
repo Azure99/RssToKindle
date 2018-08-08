@@ -1,5 +1,7 @@
 # SinaNewsToKindle
 向Kindle推送适合其阅读的新浪新闻<br/>
+<img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/SinaNewsToKindle/master/Images/screenshot1.png" />
+<img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/SinaNewsToKindle/master/Images/screenshot2.png" />
 
 # 首次使用
 您可以先启动一次程序，它会自动创建配置模板。<br/>
