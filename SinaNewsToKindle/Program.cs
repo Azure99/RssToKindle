@@ -35,10 +35,12 @@ namespace SinaNewsToKindle
                 else if (command.ToLower() == "stop")//停止服务
                 {
                     MainService.StopService();
+                    LogManager.WriteLine("Stopped!");
                 }
                 else if (command.ToLower() == "start")//启动服务
                 {
                     MainService.StartService();
+                    LogManager.WriteLine("Started!");
                 }
                 else if (command.ToLower() == "push")//立即推送
                 {
@@ -48,6 +50,7 @@ namespace SinaNewsToKindle
                 else if (command.ToLower() == "reload config") //重新读入配置文件
                 {
                     ConfigManager.ReadConfig();
+                    LogManager.WriteLine("Reload ok!");
                 }
                 else
                 {
