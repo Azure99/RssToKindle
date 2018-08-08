@@ -28,7 +28,7 @@ namespace SinaNewsToKindle
                 "</a>", count, sinaNewsBody.Tittle));
             _index.AppendLine("<p>" + sinaNewsBody.Description + "</p>");
             _index.AppendLine("<br/>");
-            _body.AppendLine("</div>");
+            _index.AppendLine("</div>");
 
 
             _body.AppendLine(string.Format("<div id=\"div{0}\">", count));

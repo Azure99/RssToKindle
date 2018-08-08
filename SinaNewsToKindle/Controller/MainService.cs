@@ -134,7 +134,7 @@ namespace SinaNewsToKindle
                 count++;
                 if (count % 10 == 0)
                 {
-                    LogManager.WriteLine(count.ToString() + " done...");
+                    LogManager.WriteLine(string.Format("<{0}> items done...", count));
                 }
                 try
                 {
