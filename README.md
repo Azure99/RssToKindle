@@ -1,0 +1,2 @@
+# SinaNewsToKindle
+向Kindle推送适合其阅读的新浪新闻
