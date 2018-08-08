@@ -16,6 +16,14 @@ namespace SinaNewsToKindle
             "http://rss.sina.com.cn/news/world/focus15.xml"
         };
         /// <summary>
+        /// 是否使用动态邮件标题
+        /// </summary>
+        public bool DynamicTitle { get; set; } = true;
+        /// <summary>
+        /// 最大新闻描述长度
+        /// </summary>
+        public int MaxDescriptionLength { get; set; } = 65;
+        /// <summary>
         /// 接收地址(Kindle信箱)
         /// </summary>
         public string ReceiverAddress { get; set; } = "xxx@kindle.com";
@@ -39,10 +47,6 @@ namespace SinaNewsToKindle
         /// 是否启用SSL
         /// </summary>
         public bool EnableSSL { get; set; } = true;
-        /// <summary>
-        /// 最大新闻描述长度
-        /// </summary>
-        public int MaxDescriptionLength { get; set; } = 65;
 
         /// <summary>
         /// 上次推送时间

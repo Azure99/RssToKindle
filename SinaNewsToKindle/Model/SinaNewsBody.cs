@@ -5,13 +5,13 @@
     /// </summary>
     class SinaNewsBody
     {
-        public string Tittle { get; }
+        public string Title { get; }
         public string Description { get; }
         public string Body { get; }
 
-        public SinaNewsBody(string tittle, string description, string body)
+        public SinaNewsBody(string title, string description, string body)
         {
-            Tittle = tittle;
+            Title = title;
             Description = description;
             Body = body;
         }

@@ -5,13 +5,13 @@
     /// </summary>
     class SinaNewsHeader
     {
-        public string Tittle { get; }
+        public string Title { get; }
         public string Description { get; }
         public string Url { get; }
 
-        public SinaNewsHeader(string tittle, string description, string url)
+        public SinaNewsHeader(string title, string description, string url)
         {
-            Tittle = tittle;
+            Title = title;
             Description = description;
             Url = url;
         }

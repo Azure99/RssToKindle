@@ -184,7 +184,13 @@ namespace SinaNewsToKindle
                         config.EmailPort,
                         config.EnableSSL);
 
-                    sender.SendMail(config.ReceiverAddress, "convert", "", path);
+                    string title = "convert";
+                    if(ConfigManager.Config.DynamicTitle)
+                    {
+                        title = Path.GetFileNameWithoutExtension(path) + new Random().Next(0, 99);
+                    }
+
+                    sender.SendMail(config.ReceiverAddress, title, "", path);
                     break;
                 }
                 catch (Exception ex)

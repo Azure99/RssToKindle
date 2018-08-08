@@ -25,14 +25,14 @@ namespace SinaNewsToKindle
             _index.AppendLine(string.Format("<div id=\"idiv{0}\">", count));
             _index.AppendLine(string.Format("<a href=\"#div{0}\">" +
                 "<h3>{1}</h3>" +
-                "</a>", count, sinaNewsBody.Tittle));
+                "</a>", count, sinaNewsBody.Title));
             _index.AppendLine("<p>" + sinaNewsBody.Description + "</p>");
             _index.AppendLine("<br/>");
             _index.AppendLine("</div>");
 
 
             _body.AppendLine(string.Format("<div id=\"div{0}\">", count));
-            _body.AppendLine("<h1>" + sinaNewsBody.Tittle + "</h1>");
+            _body.AppendLine("<h1>" + sinaNewsBody.Title + "</h1>");
             _body.AppendLine(string.Format("<a href=\"#idiv{0}\">" +
                 "<font size=\"5\">返回</font>" +
                 "</a>", count));

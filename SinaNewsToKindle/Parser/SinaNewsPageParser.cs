@@ -11,7 +11,7 @@
             int endP = page.IndexOf(ArticleEnd, startP);
             string article = page.Substring(startP, endP - startP);
 
-            return new SinaNewsBody(header.Tittle, header.Description, article);
+            return new SinaNewsBody(header.Title, header.Description, article);
         }
     }
 }

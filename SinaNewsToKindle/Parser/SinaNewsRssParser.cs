@@ -6,8 +6,8 @@ namespace SinaNewsToKindle
     {
         private const string ItemStart = "<item>";
         private const string ItemEnd = "</item>";
-        private const string TittleStart = "<title>";
-        private const string TittleEnd = "</title>";
+        private const string TitleStart = "<title>";
+        private const string TitleEnd = "</title>";
         private const string DesStart = "<description>";
         private const string DesEnd = "</description>";
         private const string LinkStart = "<link>";
@@ -26,7 +26,7 @@ namespace SinaNewsToKindle
                     Replace("\t", "").
                     Replace("　", "");
 
-                string tittle = TagParser.GetTag(pureItem, TittleStart, TittleEnd);
+                string title = TagParser.GetTag(pureItem, TitleStart, TitleEnd);
                 string link = TagParser.GetTag(pureItem, LinkStart, LinkEnd);
                 string description = TagParser.GetTag(pureItem, DesStart, DesEnd);
                 if (description.Length > ConfigManager.Config.MaxDescriptionLength)
@@ -35,15 +35,10 @@ namespace SinaNewsToKindle
                 }
                 description += "...";
 
-                if (tittle != "" && link != "" && description != "")
+                if (title != "" && link != "" && description != "")
                 {
-                    headers.Add(new SinaNewsHeader(tittle, description, link));
+                    headers.Add(new SinaNewsHeader(title, description, link));
                 }
-                /*
-                Console.WriteLine(tittle);
-                Console.WriteLine(link);
-                Console.WriteLine(description);
-                */
             }
 
             return headers.ToArray();
