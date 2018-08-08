@@ -10,26 +10,28 @@
 <br/>
 
 # 配置文件说明
-SendTime，每天推送新闻的时间，二十四小时制<br/>
+<b>SendTime</b>，每天推送新闻的时间，二十四小时制<br/>
 
-RssUrls，新浪新闻的RSS地址，这是一个Json数组，用于个性化推送内容。您可以在[新浪新闻RSS](http://rss.sina.com.cn/news/)找到所有可用的RSS地址<br/>
+<b>RssUrls</b>，新浪新闻的RSS地址，这是一个Json数组，用于个性化推送内容。您可以在[新浪新闻RSS](http://rss.sina.com.cn/news/)找到所有可用的RSS地址<br/>
 
-ReceiverAddress，Kindle接收邮箱，此处填写您的Send To Kindle邮箱<br/>
+<b>DynamicTitle</b>，发送邮件时使用动态标题，一定程度上防止被当做垃圾邮件<br/>
 
-SenderAddress，发信邮箱，可以是任意邮箱，<b>强烈建议使用Outlook</b><br/>
+<b>MaxDescriptionLength</b>，最长描述长度，规定了显示摘要的最大长度<br/>
+
+<b>ReceiverAddress</b>，Kindle接收邮箱，此处填写您的Send To Kindle邮箱<br/>
+
+<b>SenderAddress</b>，发信邮箱，可以是任意邮箱，<b>强烈建议使用Outlook</b><br/>
 您必须在Amazon用户中心<b>内容和设备-设置-个人文档设置-已认可的发件人电子邮箱列表</b>中添加发信邮箱<br/>
 
-SenderPassword，发信邮箱的密码<br/>
+<b>SenderPassword</b>，发信邮箱的密码<br/>
 
 ------若使用Outlook邮箱以下无需修改------<br/>
 
-EmailServer，STMP地址<br/>
+<b>EmailServer</b>，STMP地址<br/>
 
-EmailPort，端口<br/>
+<b>EmailPort</b>，端口<br/>
 
-EnableSSL，是否启用SSL<br/>
-
-MaxDescriptionLength，最长描述长度，规定了显示摘要的最大长度<br/>
+<b>EnableSSL</b>，是否启用SSL<br/>
 
 下面是一段模板示例
 ```Json
@@ -39,13 +41,14 @@ MaxDescriptionLength，最长描述长度，规定了显示摘要的最大长度
     "http://rss.sina.com.cn/news/china/focus15.xml",
     "http://rss.sina.com.cn/news/world/focus15.xml"
   ],
+  "DynamicTitle": true,
+  "MaxDescriptionLength": 65,
   "ReceiverAddress": "xxx@kindle.com",
   "SenderAddress": "xxx@outlook.com",
   "SenderPassword": "123456",
   "EmailServer": "smtp.outlook.com",
   "EmailPort": 587,
   "EnableSSL": true,
-  "MaxDescriptionLength": 65,
   "LastSendTime": "0001-01-01T00:00:00"
 }
 ```
