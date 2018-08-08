@@ -11,6 +11,7 @@ git clone https://github.com/Azure99/SinaNewsToKindle.git
 cd SinaNewsToKindle/SinaNewsToKindle
 dotnet run
 ```
+您可以在screen中启动服务以使其不被关闭，先运行命令[Screen](http://man.linuxde.net/screen) -S SinaNews
 
 # 首次使用
 您可以先启动一次程序，它会自动创建配置模板。<br/>
