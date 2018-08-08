@@ -3,6 +3,15 @@
 <img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/SinaNewsToKindle/master/Images/screenshot1.png" />
 <img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/SinaNewsToKindle/master/Images/screenshot2.png" />
 
+# 安装
+1. 根据[微软官方教程](https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial)安装.netcore sdk<br/>
+2. 执行下列代码，克隆并运行
+```Bash
+git clone https://github.com/Azure99/SinaNewsToKindle.git
+cd SinaNewsToKindle/SinaNewsToKindle
+dotnet run
+```
+
 # 首次使用
 您可以先启动一次程序，它会自动创建配置模板。<br/>
 随后请关闭程序，编辑根目录下的config.json，修改您的个人信息。<br/>
