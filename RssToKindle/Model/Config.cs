@@ -23,7 +23,7 @@ namespace RssToKindle.Model
         /// <summary>
         /// 最大新闻描述长度
         /// </summary>
-        public int MaxDescriptionLength { get; set; } = 65;
+        public int MaxDescriptionLength { get; set; } = 80;
         /// <summary>
         /// 接收地址(Kindle信箱)
         /// </summary>
