@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RssToKindle.Parser.PageParser
+﻿namespace RssToKindle.Parser.PageParser
 {
     static class ParserFactory
     {
@@ -16,6 +12,10 @@ namespace RssToKindle.Parser.PageParser
             else if(url.IndexOf("news.sina.com.cn") != -1)
             {
                 return new SinaNewsParser();
+            }
+            else if(url.IndexOf("column.chinadaily.com.cn") != -1)
+            {
+                return new ChinaDailyColumnParser();
             }
 
             return new BaseParser();

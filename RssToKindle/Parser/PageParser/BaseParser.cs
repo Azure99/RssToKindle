@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RssToKindle.Utils;
+﻿using RssToKindle.Utils;
 
 namespace RssToKindle.Parser.PageParser
 {
