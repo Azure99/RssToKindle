@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Xml;
 using RssToKindle.Controller;
 using RssToKindle.Model;
@@ -26,12 +25,7 @@ namespace RssToKindle.Parser
                 try
                 {
                     string description = item.SelectSingleNode("description").InnerText;
-                    description = HtmlHelper.GetPureText(description);//获取纯文本
-                    description = HtmlHelper.RemoveMultiplyNewLine(description);
-                    if(description.Length > ConfigManager.Config.MaxDescriptionLength)//最大描述长度限制
-                    {
-                        description = description.Substring(0, ConfigManager.Config.MaxDescriptionLength);
-                    }
+                    description = PreDescription(description);
 
                     NewsHeader header = new NewsHeader(
                         item.SelectSingleNode("title").InnerText,
@@ -62,6 +56,35 @@ namespace RssToKindle.Parser
                     FindAllNodes(item, nodeName, nodes);
                 }
             }
+        }
+
+        private static string PreDescription(string description)
+        {
+            description = HtmlHelper.GetPureText(description);//获取纯文本
+            description = HtmlHelper.RemoveMultiplyNewLine(description);
+
+            description = description.Trim();
+
+            try//去除原标题
+            {
+                int titleP = description.IndexOf("原标题");
+                if (titleP != -1)
+                {
+                    int spaceP = description.IndexOf("　", titleP);
+                    if (spaceP != -1)
+                    {
+                        description = description.Substring(spaceP, description.Length - spaceP).Trim();
+                    }
+                }
+            }
+            catch { }
+
+            if (description.Length > ConfigManager.Config.MaxDescriptionLength)//最大描述长度限制
+            {
+                description = description.Substring(0, ConfigManager.Config.MaxDescriptionLength);
+            }
+
+            return description;
         }
     }
 }

@@ -25,18 +25,25 @@ namespace RssToKindle.Controller
 
             _index.AppendLine(string.Format("<div id=\"idiv{0}\">", count));
             _index.AppendLine(string.Format("<a href=\"#div{0}\">" +
-                "<h3>{1}</h3>" +
+                "<font size=\"5\">{1}</font>" +
                 "</a>", count, newsBody.Title));
-            _index.AppendLine("<p>" + newsBody.Description + "</p>");
-            _index.AppendLine("<br/>");
+            _index.AppendLine("<p style=\"font-size:13px;\">" + newsBody.Description + "</p>");
             _index.AppendLine("</div>");
-
+            _index.AppendLine("<br/>");
 
             _body.AppendLine(string.Format("<div id=\"div{0}\">", count));
             _body.AppendLine("<h1>" + newsBody.Title + "</h1>");
-            _body.AppendLine(string.Format("<a href=\"#idiv{0}\">" +
+
+            //文章分类、当前第几篇、返回链接
+            _body.Append("<p>" + newsBody.Class);
+            _body.Append("&nbsp");
+            _body.Append("第" + count + "篇");
+            _body.Append("&nbsp;&nbsp;");
+            _body.Append(string.Format("<a href=\"#idiv{0}\">" +
                 "<font size=\"5\">返回</font>" +
                 "</a>", count));
+            _body.AppendLine("</p>");
+
             _body.AppendLine(newsBody.Content);
             _body.AppendLine("<br/>");
             _body.AppendLine("<br/>");
@@ -67,6 +74,10 @@ namespace RssToKindle.Controller
             sb.AppendLine("</html>");
 
             return sb.ToString();
+        }
+        private class SingleClassBuilder
+        {
+
         }
     }
 }

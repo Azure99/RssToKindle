@@ -82,7 +82,7 @@ namespace RssToKindle.Controller
             LogManager.WriteLine("Build news html page...");
             string html = BuildHTML(bodies);
 
-            string filePath = DateTime.Now.ToString("yy-MM-dd") + "News.html";
+            string filePath = "RssToKindle" + DateTime.Now.ToString("yy-MM-dd") + ".html";
             try
             {
                 File.WriteAllText(filePath, html, Encoding.UTF8);
@@ -145,15 +145,6 @@ namespace RssToKindle.Controller
                 try
                 {
                     NewsBody body = HeaderParser.Parse(header);
-
-                    System.Diagnostics.Debug.WriteLine("标题");
-                    System.Diagnostics.Debug.WriteLine(body.Title);
-                    System.Diagnostics.Debug.WriteLine("简介");
-                    System.Diagnostics.Debug.WriteLine(body.Description);
-                    System.Diagnostics.Debug.WriteLine("内容");
-                    System.Diagnostics.Debug.WriteLine(body.Content);
-                    System.Diagnostics.Debug.WriteLine("分类");
-                    System.Diagnostics.Debug.WriteLine(body.Class);
 
                     bodyList.Add(body);
                 }
