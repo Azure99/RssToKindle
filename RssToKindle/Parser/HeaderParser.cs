@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using RssToKindle.Model;
-using RssToKindle.Parser.PageParser;
 using RssToKindle.Utils;
 
 namespace RssToKindle.Parser
@@ -13,8 +12,7 @@ namespace RssToKindle.Parser
         {
             string page = Client.GET(header.Url);
 
-            BaseParser parser = ParserFactory.CreateParser(header.Url);
-            string content = parser.Parse(page);
+            string content = ArticleParser.Parse(page, header.Url);
 
             NewsBody body = new NewsBody(header.Title, header.Description, content);
 
