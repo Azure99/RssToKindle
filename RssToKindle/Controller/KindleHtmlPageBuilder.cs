@@ -37,7 +37,7 @@ namespace RssToKindle.Controller
             //文章分类、当前第几篇、返回链接
             _body.Append("<p>" + newsBody.Class);
             _body.Append("&nbsp");
-            _body.Append("第" + count + "篇");
+            _body.Append("第" + (count + 1) + "篇");
             _body.Append("&nbsp;&nbsp;");
             _body.Append(string.Format("<a href=\"#idiv{0}\">" +
                 "<font size=\"5\">返回</font>" +
@@ -45,6 +45,7 @@ namespace RssToKindle.Controller
             _body.AppendLine("</p>");
 
             _body.AppendLine(newsBody.Content);
+            _body.AppendLine("<br/>");
             _body.AppendLine("<br/>");
             _body.AppendLine("<br/>");
             _body.AppendLine("<br/>");
