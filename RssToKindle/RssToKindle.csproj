@@ -3,12 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <Company>Rainng</Company>
     <Authors>Azure99</Authors>
-    <Description>A tool for users to read Sina news on Kindle easily.</Description>
+    <Company>Rainng</Company>
+    <Description>A tool for users to read news on Kindle easily.</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.5" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 

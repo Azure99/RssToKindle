@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace SinaNewsToKindle
+namespace RssToKindle.Controller
 {
     static class LogManager
     {
@@ -44,6 +44,23 @@ namespace SinaNewsToKindle
 
             string message = sb.ToString();
             Console.WriteLine(message);
+            try
+            {
+                File.AppendAllText("Error.txt", message);
+            }
+            catch { }
+        }
+
+        public static void ShowExceptionImplicitly(Exception ex, string appendMessage = "")
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(DateTime.Now.ToString());
+            sb.AppendLine("Exception:" + appendMessage);
+            sb.AppendLine(ex.ToString());
+            sb.AppendLine("--------------------");
+            sb.AppendLine("");
+
+            string message = sb.ToString();
             try
             {
                 File.AppendAllText("Error.txt", message);

@@ -1,6 +1,7 @@
 ﻿using System.Text;
+using RssToKindle.Model;
 
-namespace SinaNewsToKindle
+namespace RssToKindle.Controller
 {
     class KindleHtmlPageBuilder
     {
@@ -17,26 +18,26 @@ namespace SinaNewsToKindle
         /// <summary>
         /// 添加新闻
         /// </summary>
-        /// <param name="sinaNewsBody"></param>
-        public void AddNews(SinaNewsBody sinaNewsBody)
+        /// <param name="newsBody"></param>
+        public void AddNews(NewsBody newsBody)
         {
             int count = _count++;
 
             _index.AppendLine(string.Format("<div id=\"idiv{0}\">", count));
             _index.AppendLine(string.Format("<a href=\"#div{0}\">" +
                 "<h3>{1}</h3>" +
-                "</a>", count, sinaNewsBody.Title));
-            _index.AppendLine("<p>" + sinaNewsBody.Description + "</p>");
+                "</a>", count, newsBody.Title));
+            _index.AppendLine("<p>" + newsBody.Description + "</p>");
             _index.AppendLine("<br/>");
             _index.AppendLine("</div>");
 
 
             _body.AppendLine(string.Format("<div id=\"div{0}\">", count));
-            _body.AppendLine("<h1>" + sinaNewsBody.Title + "</h1>");
+            _body.AppendLine("<h1>" + newsBody.Title + "</h1>");
             _body.AppendLine(string.Format("<a href=\"#idiv{0}\">" +
                 "<font size=\"5\">返回</font>" +
                 "</a>", count));
-            _body.AppendLine(sinaNewsBody.Body);
+            _body.AppendLine(newsBody.Content);
             _body.AppendLine("<br/>");
             _body.AppendLine("<br/>");
             _body.AppendLine("<br/>");

@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 
-namespace SinaNewsToKindle
+namespace RssToKindle.Utils
 {
     class EmailSender
     {
@@ -18,12 +18,13 @@ namespace SinaNewsToKindle
         /// <param name="enableSSL">是否启用SSL</param>
         public EmailSender(string account, string password, string host, int port, bool enableSSL)
         {
-            _sc = new SmtpClient(host, port);
-
-            _sc.UseDefaultCredentials = false;
-            _sc.Credentials = new System.Net.NetworkCredential(account, password);
-            _sc.DeliveryMethod = SmtpDeliveryMethod.Network;
-            _sc.EnableSsl = enableSSL;
+            _sc = new SmtpClient(host, port)
+            {
+                UseDefaultCredentials = false,
+                Credentials = new System.Net.NetworkCredential(account, password),
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                EnableSsl = enableSSL
+            };
         }
 
         /// <summary>
@@ -47,9 +48,12 @@ namespace SinaNewsToKindle
 
             using (FileStream fs = new FileStream(file, FileMode.Open))
             {
-                ContentType ct = new ContentType();
-                ct.MediaType = MediaTypeNames.Text.Html;
-                ct.Name = Path.GetFileName(file);
+                ContentType ct = new ContentType
+                {
+                    MediaType = MediaTypeNames.Text.Html,
+                    Name = Path.GetFileName(file)
+                };
+
                 mMessage.Attachments.Add(new Attachment(fs, ct));
 
                 _sc.Send(mMessage);

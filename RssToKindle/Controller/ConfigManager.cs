@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using RssToKindle.Model;
+using RssToKindle.Utils;
 
-namespace SinaNewsToKindle
+namespace RssToKindle.Controller
 {
     static class ConfigManager
     {

@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Timers;
+using RssToKindle.Model;
+using RssToKindle.Parser;
+using RssToKindle.Parser.PageParser;
+using RssToKindle.Utils;
 
-namespace SinaNewsToKindle
+namespace RssToKindle.Controller
 {
     class MainService
     {
@@ -60,7 +64,7 @@ namespace SinaNewsToKindle
             DateTime lastDate = DateTime.Parse(config.LastSendTime.ToShortDateString());
             DateTime nowTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
             DateTime sendTime = DateTime.Parse(config.SendTime);
-            
+
             if (nowDate > lastDate && nowTime > sendTime)
             {
                 GetNewsAndSendToKindle();
@@ -74,7 +78,7 @@ namespace SinaNewsToKindle
             _timer.Stop();
 
 
-            SinaNewsBody[] bodies = CrawleSinaNews();
+            NewsBody[] bodies = CrawleNews();
 
             LogManager.WriteLine("Build news html page...");
             string html = BuildHTML(bodies);
@@ -103,33 +107,33 @@ namespace SinaNewsToKindle
         }
 
         /// <summary>
-        /// 抓取新浪新闻
+        /// 抓取新闻
         /// </summary>
         /// <returns></returns>
-        private SinaNewsBody[] CrawleSinaNews()
+        private NewsBody[] CrawleNews()
         {
             LogManager.WriteLine("Crawle news rss...");
-            StringBuilder xmlSB = new StringBuilder();
+
+            List<NewsHeader> headers = new List<NewsHeader>();
             foreach (string xmlUrl in ConfigManager.Config.RssUrls)
             {
                 try
                 {
-                    xmlSB.AppendLine(Client.GET(xmlUrl));
+                    string xml = Client.GET(xmlUrl);
+                    headers.AddRange(RssParser.Parse(xml));
                 }
                 catch (Exception ex)
                 {
                     LogManager.ShowException(ex, "Cannot get " + xmlUrl);
                 }
-
             }
-            string xml = xmlSB.ToString();
+
 
             LogManager.WriteLine("Crawle news body...");
             int count = 0;
 
-            SinaNewsHeader[] headers = SinaNewsRssParser.Parse(xml);
-            List<SinaNewsBody> bodyList = new List<SinaNewsBody>();
-            foreach (SinaNewsHeader header in headers)
+            List<NewsBody> bodyList = new List<NewsBody>();
+            foreach (NewsHeader header in headers)
             {
                 count++;
                 if (count % 10 == 0)
@@ -138,10 +142,21 @@ namespace SinaNewsToKindle
                 }
                 try
                 {
-                    SinaNewsBody body = SinaNewsPageParser.Parse(header);
+                    NewsBody body = HeaderParser.Parse(header);
+
+                    System.Diagnostics.Debug.WriteLine("标题");
+                    System.Diagnostics.Debug.WriteLine(body.Title);
+                    System.Diagnostics.Debug.WriteLine("简介");
+                    System.Diagnostics.Debug.WriteLine(body.Description);
+                    System.Diagnostics.Debug.WriteLine("内容");
+                    System.Diagnostics.Debug.WriteLine(body.Content);
+
                     bodyList.Add(body);
                 }
-                catch { }
+                catch(Exception ex)
+                {
+                    LogManager.ShowException(ex);
+                }
 
             }
 
@@ -153,11 +168,11 @@ namespace SinaNewsToKindle
         /// </summary>
         /// <param name="bodies"></param>
         /// <returns></returns>
-        private string BuildHTML(SinaNewsBody[] bodies)
+        private string BuildHTML(NewsBody[] bodies)
         {
             KindleHtmlPageBuilder builder = new KindleHtmlPageBuilder();
 
-            foreach (SinaNewsBody body in bodies)
+            foreach (NewsBody body in bodies)
             {
                 builder.AddNews(body);
             }
@@ -185,7 +200,7 @@ namespace SinaNewsToKindle
                         config.EnableSSL);
 
                     string title = "convert";
-                    if(ConfigManager.Config.DynamicTitle)
+                    if (ConfigManager.Config.DynamicTitle)
                     {
                         title = Path.GetFileNameWithoutExtension(path) + new Random().Next(0, 99);
                     }

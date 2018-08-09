@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SinaNewsToKindle
+namespace RssToKindle.Model
 {
     class Config
     {
@@ -9,7 +9,7 @@ namespace SinaNewsToKindle
         /// </summary>
         public string SendTime { get; set; } = "8:00";
         /// <summary>
-        /// 新浪新闻的RSS地址，可自定义感兴趣的内容
+        /// 新闻的RSS地址，可自定义感兴趣的内容
         /// </summary>
         public string[] RssUrls { get; set; } = new string[2] {
             "http://rss.sina.com.cn/news/china/focus15.xml",

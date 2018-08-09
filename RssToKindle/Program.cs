@@ -1,6 +1,7 @@
 ﻿using System;
+using RssToKindle.Controller;
 
-namespace SinaNewsToKindle
+namespace RssToKindle
 {
     class Program
     {
@@ -8,7 +9,7 @@ namespace SinaNewsToKindle
         static void Main(string[] args)
         {
             LogManager.WriteLine("----------");
-            LogManager.WriteLine("Sina News to Kindle");
+            LogManager.WriteLine("RSS to Kindle");
             LogManager.WriteLine("Starting service...");
             LogManager.WriteLine("Checking configuration...");
 
@@ -56,7 +57,7 @@ namespace SinaNewsToKindle
                 {
                     LogManager.WriteLine("Wrong Command!");
                     Console.WriteLine("You can use this commands:");
-                    Console.WriteLine("exit:\tExit SinaNewsToKindle");
+                    Console.WriteLine("exit:\tExit RssToKindle");
                     Console.WriteLine("start:\tStart service");
                     Console.WriteLine("stop\tStop service");
                     Console.WriteLine("push:\tPush news immediately");

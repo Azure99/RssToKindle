@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SinaNewsToKindle
+namespace RssToKindle.Utils
 {
     static class JsonSerialization
     {

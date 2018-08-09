@@ -2,16 +2,18 @@
 using System.Net;
 using System.Text;
 
-namespace SinaNewsToKindle
+namespace RssToKindle.Utils
 {
     static class Client
     {
         private static WebClient _wc;
         static Client()
         {
-            _wc = new WebClient();
-            _wc.Proxy = null;
-            _wc.Encoding = Encoding.UTF8;
+            _wc = new WebClient
+            {
+                Proxy = null,
+                Encoding = Encoding.UTF8
+            };
         }
 
         public static string GET(string url, int tryCount = 2)
