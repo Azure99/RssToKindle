@@ -114,12 +114,15 @@ namespace RssToKindle.Controller
             LogManager.WriteLine("Crawle news rss...");
 
             List<NewsHeader> headers = new List<NewsHeader>();
-            foreach (string xmlUrl in ConfigManager.Config.RssUrls)
+
+            for (int i = 0; i < ConfigManager.Config.Rss.Length; i++)
             {
+                string xmlUrl = ConfigManager.Config.Rss[i][0];
+                string rssClass = ConfigManager.Config.Rss[i][1];
                 try
                 {
                     string xml = Client.GET(xmlUrl);
-                    headers.AddRange(RssParser.Parse(xml));
+                    headers.AddRange(RssParser.Parse(xml, rssClass));
                 }
                 catch (Exception ex)
                 {
@@ -149,6 +152,8 @@ namespace RssToKindle.Controller
                     System.Diagnostics.Debug.WriteLine(body.Description);
                     System.Diagnostics.Debug.WriteLine("内容");
                     System.Diagnostics.Debug.WriteLine(body.Content);
+                    System.Diagnostics.Debug.WriteLine("分类");
+                    System.Diagnostics.Debug.WriteLine(body.Class);
 
                     bodyList.Add(body);
                 }

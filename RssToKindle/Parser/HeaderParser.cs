@@ -14,7 +14,7 @@ namespace RssToKindle.Parser
 
             string content = ArticleParser.Parse(page, header.Url);
 
-            NewsBody body = new NewsBody(header.Title, header.Description, content);
+            NewsBody body = new NewsBody(header.Title, header.Description, content, header.Class);
 
             return body;
         }

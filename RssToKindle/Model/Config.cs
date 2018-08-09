@@ -11,9 +11,10 @@ namespace RssToKindle.Model
         /// <summary>
         /// 新闻的RSS地址，可自定义感兴趣的内容
         /// </summary>
-        public string[] RssUrls { get; set; } = new string[2] {
-            "http://rss.sina.com.cn/news/china/focus15.xml",
-            "http://rss.sina.com.cn/news/world/focus15.xml"
+        public string[][] Rss { get; set; } = {
+            new string[2]{ "http://feedmaker.kindle4rss.com/feeds/zhihu-daily.xml", "知乎日报" },
+            new string[2]{ "http://feedmaker.kindle4rss.com/feeds/column.chinadaily.xml", "中国日报专栏" },
+            new string[2]{ "http://rss.sina.com.cn/news/china/focus15.xml", "新浪国内要闻" }
         };
         /// <summary>
         /// 是否使用动态邮件标题

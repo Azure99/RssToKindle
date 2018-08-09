@@ -9,7 +9,7 @@ namespace RssToKindle.Parser
 {
     static class RssParser
     {
-        public static NewsHeader[] Parse(string xml)
+        public static NewsHeader[] Parse(string xml, string rssClass)
         {
             xml = xml.Replace("content:encoded", "description");
             
@@ -36,7 +36,8 @@ namespace RssToKindle.Parser
                     NewsHeader header = new NewsHeader(
                         item.SelectSingleNode("title").InnerText,
                         description,
-                        item.SelectSingleNode("link").InnerText
+                        item.SelectSingleNode("link").InnerText,
+                        rssClass
                         );
                     headers.Add(header);
 

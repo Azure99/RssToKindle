@@ -8,12 +8,14 @@
         public string Title { get; }
         public string Description { get; }
         public string Url { get; }
+        public string Class { get; }
 
-        public NewsHeader(string title, string description, string url)
+        public NewsHeader(string title, string description, string url, string articleClass)
         {
             Title = title;
             Description = description;
             Url = url;
+            Class = articleClass;
         }
     }
 }

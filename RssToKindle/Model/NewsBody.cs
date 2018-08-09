@@ -8,12 +8,14 @@
         public string Title { get; }
         public string Description { get; }
         public string Content { get; }
+        public string Class { get; }
 
-        public NewsBody(string title, string description, string content)
+        public NewsBody(string title, string description, string content, string articleClass)
         {
             Title = title;
             Description = description;
             Content = content;
+            Class = articleClass;
         }
     }
 }

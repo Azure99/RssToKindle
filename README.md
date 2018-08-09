@@ -22,7 +22,7 @@ dotnet run
 # 配置文件说明
 <b>SendTime</b>，每天推送新闻的时间，二十四小时制<br/>
 
-<b>RssUrls</b>，新闻的RSS地址，这是一个Json数组，用于个性化推送内容。目前支持新浪新闻、知乎日报<br/>
+<b>RssUrls</b>，新闻的RSS地址以及名称，这是一个二维数组，存放Rss地址和名称，用于个性化推送内容。<br/>
 
 <b>DynamicTitle</b>，发送邮件时使用动态标题，一定程度上防止被当做垃圾邮件<br/>
 
@@ -47,9 +47,19 @@ dotnet run
 ```Json
 {
   "SendTime": "8:00",
-  "RssUrls": [
-    "http://rss.sina.com.cn/news/china/focus15.xml",
-    "http://rss.sina.com.cn/news/world/focus15.xml"
+  "Rss": [
+    [
+      "http://feedmaker.kindle4rss.com/feeds/zhihu-daily.xml",
+      "知乎日报"
+    ],
+    [
+      "http://feedmaker.kindle4rss.com/feeds/column.chinadaily.xml",
+      "中国日报专栏"
+    ],
+    [
+      "http://rss.sina.com.cn/news/china/focus15.xml",
+      "新浪国内要闻"
+    ]
   ],
   "DynamicTitle": true,
   "MaxDescriptionLength": 65,
