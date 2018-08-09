@@ -1,14 +1,14 @@
-# SinaNewsToKindle
-向Kindle推送适合其阅读的新浪新闻<br/>
-<img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/SinaNewsToKindle/master/Images/screenshot1.png" />
-<img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/SinaNewsToKindle/master/Images/screenshot2.png" />
+# RssToKindle
+个性化抓取RSS新闻，并推送到Kindle<br/>
+<img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/RssToKindle/master/Images/screenshot1.png" />
+<img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/RssToKindle/master/Images/screenshot2.png" />
 
 # 安装
 1. 根据[微软官方教程](https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial)安装.netcore sdk<br/>
 2. 执行下列代码，克隆并运行
 ```Bash
-git clone https://github.com/Azure99/SinaNewsToKindle.git
-cd SinaNewsToKindle/SinaNewsToKindle
+git clone https://github.com/Azure99/RssToKindle.git
+cd RssToKindle/RssToKindle
 dotnet run
 ```
 您可以在screen中启动服务以使其不被关闭，先运行命令[Screen](http://man.linuxde.net/screen) -S SinaNews
@@ -22,7 +22,7 @@ dotnet run
 # 配置文件说明
 <b>SendTime</b>，每天推送新闻的时间，二十四小时制<br/>
 
-<b>RssUrls</b>，新浪新闻的RSS地址，这是一个Json数组，用于个性化推送内容。您可以在[新浪新闻RSS](http://rss.sina.com.cn/news/)找到所有可用的RSS地址<br/>
+<b>RssUrls</b>，新闻的RSS地址，这是一个Json数组，用于个性化推送内容。目前支持新浪新闻、知乎日报<br/>
 
 <b>DynamicTitle</b>，发送邮件时使用动态标题，一定程度上防止被当做垃圾邮件<br/>
 
