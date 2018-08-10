@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using RssToKindle.Model;
 
 namespace RssToKindle.Controller
@@ -54,7 +55,10 @@ namespace RssToKindle.Controller
             sb.AppendLine("</head>");
             sb.AppendLine("</html>");
 
-            return sb.ToString();
+            string page = sb.ToString();
+            page = Regex.Replace(page, @"<img[^>]*>", "");//去除图片
+
+            return page;
         }
 
         private string BuildBody()
