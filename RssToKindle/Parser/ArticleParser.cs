@@ -9,29 +9,33 @@ namespace RssToKindle.Parser
         {
             url = url.ToLower();
 
-            if (url.IndexOf("daily.zhihu.com") != -1)
+            if (url.IndexOf("daily.zhihu.com") != -1)//知乎日报
             {
                 return GeneralParse(html, "//div[@class='content']");
             }
-            else if (url.IndexOf("news.sina.com.cn") != -1)
+            else if (url.IndexOf("news.sina.com.cn") != -1)//新浪新闻
             {
                 return GeneralParse(html, "//div[@class='article']");
             }
-            else if (url.IndexOf("column.chinadaily.com.cn") != -1)
+            else if (url.IndexOf("column.chinadaily.com.cn") != -1)//中国日报:专栏
             {
                 return GeneralParse(html, "//div[@class='article']");
             }
-            else if (url.IndexOf("sspai.com") != -1)
+            else if (url.IndexOf("sspai.com") != -1)//少数派
             {
                 return GeneralParse(html, "//div[@ref='content']");
             }
-            else if (url.IndexOf("www.cnbeta.com") != -1)
+            else if (url.IndexOf("www.cnbeta.com") != -1)//CnBeta
             {
                 return GeneralParse(html, "//div[@class='cnbeta-article-body']");
             }
-            else if(url.IndexOf("www.infzm.com") != -1)
+            else if (url.IndexOf("www.infzm.com") != -1)//南方周末
             {
                 return GeneralParse(html, "//section[@id='articleContent']");
+            }
+            else if (url.IndexOf("www.jianshu.com") != -1)//简书
+            {
+                return GeneralParse(html, "//div[@class='show-content-free']");
             }
 
             return GeneralParse(html);
@@ -43,6 +47,7 @@ namespace RssToKindle.Parser
             hDoc.LoadHtml(html);
 
             HtmlNode node = hDoc.DocumentNode.SelectSingleNode(xpath);
+            HtmlHelper.RemoveNoTextNode(node);
 
             string content = node.InnerHtml;
 
@@ -54,5 +59,6 @@ namespace RssToKindle.Parser
             return HtmlHelper.RemoveMultiplyNewLine(
                 HtmlHelper.GetPureText(html));
         }
+        
     }
 }

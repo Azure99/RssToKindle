@@ -19,5 +19,33 @@ namespace RssToKindle.Utils
         {
             return str.Replace("\r\n\r\n", "").Replace("\r\r", "").Replace("\n\n", "");
         }
+
+        public static void RemoveNoTextNode(HtmlNode node)
+        {
+            List<HtmlNode> noTextNodes = new List<HtmlNode>();
+            FindAllNoTextNode(node, noTextNodes);
+            Console.WriteLine(noTextNodes.Count);
+
+            foreach(HtmlNode child in noTextNodes)
+            {
+                try
+                {
+                    child.Remove();
+                }
+                catch { }
+            }
+        }
+
+        private static void FindAllNoTextNode(HtmlNode node, List<HtmlNode> noTextNodes)
+        {
+            foreach(HtmlNode child in node.ChildNodes)
+            {
+                if (string.IsNullOrEmpty(child.InnerText))
+                {
+                    noTextNodes.Add(child);
+                }
+                FindAllNoTextNode(child, noTextNodes);
+            }
+        }
     }
 }
