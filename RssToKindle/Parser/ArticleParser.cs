@@ -29,6 +29,10 @@ namespace RssToKindle.Parser
             {
                 return GeneralParse(html, "//div[@class='cnbeta-article-body']");
             }
+            else if(url.IndexOf("www.infzm.com") != -1)
+            {
+                return GeneralParse(html, "//section[@id='articleContent']");
+            }
 
             return GeneralParse(html);
         }
