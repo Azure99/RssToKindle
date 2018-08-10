@@ -83,6 +83,10 @@ namespace RssToKindle.Controller
             string html = BuildHTML(bodies);
 
             string filePath = "RssToKindle" + DateTime.Now.ToString("yy-MM-dd") + ".html";
+
+#if DEBUG
+            filePath = "R2K-Debug" + DateTime.Now.ToString("HH-mm-ss") + ".html";
+#endif
             try
             {
                 File.WriteAllText(filePath, html, Encoding.UTF8);

@@ -7,16 +7,20 @@ namespace RssToKindle.Controller
     class KindleHtmlPageBuilder
     {
         private int _classCount;//共有多少分类
-        private Dictionary<string, ClassBuilder> _dic;
+        private Dictionary<string, ClassBuilder> _dic;//每个分类的构造器
         public KindleHtmlPageBuilder()
         {
             _classCount = 0;
             _dic = new Dictionary<string, ClassBuilder>();
         }
 
+        /// <summary>
+        /// 添加新闻
+        /// </summary>
+        /// <param name="newsBody">新闻对象</param>
         public void AddNews(NewsBody newsBody)
         {
-            if(!_dic.ContainsKey(newsBody.Class))
+            if(!_dic.ContainsKey(newsBody.Class))//确保分类存在
             {
                 _dic.Add(newsBody.Class, new ClassBuilder(newsBody.Class, _classCount++));
             }
@@ -36,6 +40,7 @@ namespace RssToKindle.Controller
             sb.AppendLine("<head>");
             sb.AppendLine("<title>News</title>");
             sb.AppendLine("<meta charset=\"utf-8\"/>");
+            sb.AppendLine(BuildGeneralStyle());
             sb.AppendLine("<body>");
 
             sb.AppendLine(BuildBody());
@@ -53,7 +58,7 @@ namespace RssToKindle.Controller
             StringBuilder indexSb = new StringBuilder();
             StringBuilder bodySb = new StringBuilder();
 
-            classSb.AppendLine("<div id=\"main\">");
+            classSb.AppendLine("<div id=\"main\" style=\"width:100%;float:left;\">");
             classSb.AppendLine("<h1>RSS To Kindle</h1>");
             classSb.AppendLine("<p>" + System.DateTime.Now.ToShortDateString() + "</p>");
             classSb.AppendLine("<br/><br/>");
@@ -65,13 +70,15 @@ namespace RssToKindle.Controller
                 classSb.Append(string.Format("<a href=\"#class{0}\">" +
                     "<font size=\"5\">{1}({2})</font>" +
                     "</a>", cb.ID, cb.Name, cb.Count));
-                classSb.AppendLine("<br/>");
-                classSb.AppendLine("<br/>");
+                classSb.AppendLine("<br/><br/>");
 
                 indexSb.AppendLine("<hr/>");
-                indexSb.AppendLine(string.Format("<div id=\"class{0}\">", cb.ID));
-                indexSb.AppendLine("<h1>" + name + "</h1>");
-                indexSb.AppendLine("<center><a href=\"#main\"><font size=\"5\">返回</font></a></center>");
+                indexSb.AppendLine(string.Format("<div id=\"class{0}\" style=\"width:100%;float:left;\">", cb.ID));
+                indexSb.AppendLine(string.Format(
+                    "<font size=\"8\">{0}</font><font size=\"2\">({1})</font><br/>", 
+                    name, 
+                    cb.Count));
+                indexSb.AppendLine("<a href=\"#main\"><font size=\"5\">返回</font></a><br/><br/>");
                 indexSb.AppendLine(cb.GetIndexHtml());
 
                 indexSb.AppendLine("</div>");
@@ -79,12 +86,24 @@ namespace RssToKindle.Controller
                 bodySb.AppendLine(cb.GetBodyHtml());
             }
 
-            classSb.AppendLine("</div>");
             classSb.AppendLine("<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>");
+            classSb.AppendLine("</div>");
 
             string body = classSb.ToString() + indexSb.ToString() + bodySb.ToString();
             return body;
         }
+
+        private string BuildGeneralStyle()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<style type=\"text/css\">");
+            sb.AppendLine("table{ word-break:break-all; table-layout:fixed; width:100%; border-collapse:collapse; border:solid 1px Black; }");
+            sb.AppendLine("table td{ width:50px; height:20px;  border:solid 1px Black; padding:30px;}");
+            sb.AppendLine(".indexa{ text-decoration:none; }");
+            sb.AppendLine("</style>");
+            return sb.ToString();
+        }
+
         private class ClassBuilder
         {
             private StringBuilder _index { get; }
@@ -106,13 +125,32 @@ namespace RssToKindle.Controller
             {
                 int count = Count++;
 
-                _index.AppendLine(string.Format("<a href=\"#{0}div{1}\">" +
-                    "<font size=\"5\">{2}</font>" +
-                    "</a>", ID,count, newsBody.Title));
-                _index.AppendLine("<p style=\"font-size:13px;\">" + newsBody.Description + "</p>");
-                _index.AppendLine("<br/>");
+                if (count % 2 == 0)
+                {
+                    _index.AppendLine("<tr>");
+                }
+                _index.AppendLine("<td>");
 
-                _body.AppendLine(string.Format("<div id=\"{0}div{1}\">", ID, count));
+                _index.AppendLine(string.Format(
+                    "<a class=\"indexa\" href=\"#{0}div{1}\">" +
+                    "<font size=\"4\">{2}</font>" +
+                    "</a>" +
+                    "<br/>", 
+                    ID, count, newsBody.Title));
+
+                _index.AppendLine(string.Format(
+                    "<a class=\"indexa\" href=\"#{0}div{1}\" style=\"font-size:13px;\">" +
+                    "{2}" +
+                    "</a>", 
+                    ID, count, newsBody.Description));
+
+                _index.AppendLine("</td>");
+                if (count % 2 == 1)
+                {
+                    _index.AppendLine("</tr>");
+                }
+
+                _body.AppendLine(string.Format("<div id=\"{0}div{1}\" style=\"width:100%;float:left;\">", ID, count));
                 _body.AppendLine("<h1>" + newsBody.Title + "</h1>");
 
                 //文章分类、当前第几篇、返回链接
@@ -133,7 +171,18 @@ namespace RssToKindle.Controller
 
             public string GetIndexHtml()
             {
-                return _index.ToString() + "<br/><br/><br/>";
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("<table");
+                sb.AppendLine(_index.ToString());
+
+                if(Count % 2 == 1)
+                {
+                    sb.AppendLine("</tr>");
+                }
+
+                sb.AppendLine("</table>");
+                sb.AppendLine("<br/><br/><br/>");
+                return sb.ToString();
             }
 
             public string GetBodyHtml()
