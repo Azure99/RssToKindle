@@ -4,6 +4,12 @@ using RssToKindle.Model;
 
 namespace RssToKindle.Controller
 {
+    /*  新闻页面由三部分构成
+     * 1.分类索引(id=main)，包含所有分类，点击即可跳转到对应分类的目录
+     * 2.分类目录(id=class %d)，包含此分类下所有新闻的标题与简介，点击标题即可进入新闻主体
+     * 3.新闻主体(id=%d div %d)，包含标题与全文
+     */
+
     class KindleHtmlPageBuilder
     {
         private int _classCount;//共有多少分类
@@ -40,7 +46,6 @@ namespace RssToKindle.Controller
             sb.AppendLine("<head>");
             sb.AppendLine("<title>News</title>");
             sb.AppendLine("<meta charset=\"utf-8\"/>");
-            sb.AppendLine(BuildGeneralStyle());
             sb.AppendLine("<body>");
 
             sb.AppendLine(BuildBody());
@@ -58,7 +63,7 @@ namespace RssToKindle.Controller
             StringBuilder indexSb = new StringBuilder();
             StringBuilder bodySb = new StringBuilder();
 
-            classSb.AppendLine("<div id=\"main\" style=\"width:100%;float:left;\">");
+            classSb.AppendLine("<div id=\"main\" style=\"width:100%; float:left;\">");
             classSb.AppendLine("<h1>RSS To Kindle</h1>");
             classSb.AppendLine("<p>" + System.DateTime.Now.ToShortDateString() + "</p>");
             classSb.AppendLine("<br/><br/>");
@@ -78,7 +83,9 @@ namespace RssToKindle.Controller
                     "<font size=\"8\">{0}</font><font size=\"2\">({1})</font><br/>", 
                     name, 
                     cb.Count));
-                indexSb.AppendLine("<a href=\"#main\"><font size=\"5\">返回</font></a><br/><br/>");
+
+                //indexSb.AppendLine("<a href=\"#front\"><font size=\"5\">返回</font></a><br/><br/>");
+                indexSb.AppendLine("<br/>");
                 indexSb.AppendLine(cb.GetIndexHtml());
 
                 indexSb.AppendLine("</div>");
@@ -86,22 +93,11 @@ namespace RssToKindle.Controller
                 bodySb.AppendLine(cb.GetBodyHtml());
             }
 
-            classSb.AppendLine("<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>");
+            classSb.AppendLine("<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>");
             classSb.AppendLine("</div>");
 
             string body = classSb.ToString() + indexSb.ToString() + bodySb.ToString();
             return body;
-        }
-
-        private string BuildGeneralStyle()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<style type=\"text/css\">");
-            sb.AppendLine("table{ word-break:break-all; table-layout:fixed; width:100%; border-collapse:collapse; border:solid 1px Black; }");
-            sb.AppendLine("table td{ width:50px; height:20px;  border:solid 1px Black; padding:30px;}");
-            sb.AppendLine(".indexa{ text-decoration:none; }");
-            sb.AppendLine("</style>");
-            return sb.ToString();
         }
 
         private class ClassBuilder
@@ -127,9 +123,23 @@ namespace RssToKindle.Controller
 
                 if (count % 2 == 0)
                 {
-                    _index.AppendLine("<tr>");
+                    _index.AppendLine("<div style=\"" +
+                        "overflow:hidden;" +
+                        "\">");
                 }
-                _index.AppendLine("<td>");
+
+                string divFloat = (count % 2 == 0) ? "float:left;" : "float:right;";
+
+                _index.AppendLine("<div style=\"" +
+                    "width:47%; " +
+                    divFloat +
+                    "padding-bottom:400px; " +
+                    "margin-bottom:-400px;\">");
+
+                if (count > 1)
+                {
+                    _index.AppendLine("<hr/><br/>");
+                }
 
                 _index.AppendLine(string.Format(
                     "<a class=\"indexa\" href=\"#{0}div{1}\">" +
@@ -139,15 +149,12 @@ namespace RssToKindle.Controller
                     ID, count, newsBody.Title));
 
                 _index.AppendLine(string.Format(
-                    "<a class=\"indexa\" href=\"#{0}div{1}\" style=\"font-size:13px;\">" +
-                    "{2}" +
-                    "</a>", 
-                    ID, count, newsBody.Description));
+                    "<p style=\"font-size:13px;\">{0}</p>", newsBody.Description));
 
-                _index.AppendLine("</td>");
+                _index.AppendLine("</div>");
                 if (count % 2 == 1)
                 {
-                    _index.AppendLine("</tr>");
+                    _index.AppendLine("</div>");
                 }
 
                 _body.AppendLine(string.Format("<div id=\"{0}div{1}\" style=\"width:100%;float:left;\">", ID, count));
@@ -171,18 +178,12 @@ namespace RssToKindle.Controller
 
             public string GetIndexHtml()
             {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("<table");
-                sb.AppendLine(_index.ToString());
-
                 if(Count % 2 == 1)
                 {
-                    sb.AppendLine("</tr>");
+                    _index.AppendLine("</div>");
                 }
-
-                sb.AppendLine("</table>");
-                sb.AppendLine("<br/><br/><br/>");
-                return sb.ToString();
+                _index.AppendLine("<br/><br/><br/><br/><br/><br/><br/><br/><br/>");
+                return _index.ToString();
             }
 
             public string GetBodyHtml()
