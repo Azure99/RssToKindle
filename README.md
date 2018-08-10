@@ -9,7 +9,7 @@
 2. 执行下列代码，克隆并运行
 ```Bash
 git clone https://github.com/Azure99/RssToKindle.git
-cd RssToKindle/RssToKindle
+cd SinaNewsToKindle/RssToKindle
 dotnet run
 ```
 您可以在screen中启动服务以使其不被关闭，先运行命令[Screen](http://man.linuxde.net/screen) -S RssToKindle
