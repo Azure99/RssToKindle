@@ -24,7 +24,6 @@ namespace RssToKindle.Utils
         {
             List<HtmlNode> noTextNodes = new List<HtmlNode>();
             FindAllNoTextNode(node, noTextNodes);
-            Console.WriteLine(noTextNodes.Count);
 
             foreach(HtmlNode child in noTextNodes)
             {
@@ -43,6 +42,7 @@ namespace RssToKindle.Utils
                 if (string.IsNullOrEmpty(child.InnerText))
                 {
                     noTextNodes.Add(child);
+                    return;
                 }
                 FindAllNoTextNode(child, noTextNodes);
             }
