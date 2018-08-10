@@ -10,7 +10,7 @@
 ```Bash
 git clone https://github.com/Azure99/RssToKindle.git
 cd RssToKindle/RssToKindle
-dotnet run
+dotnet run -c Release
 ```
 您可以在screen中启动服务以使其不被关闭，先运行命令[Screen](http://man.linuxde.net/screen) -S RssToKindle
 
@@ -61,6 +61,14 @@ dotnet run
     [
       "http://rss.sina.com.cn/news/china/focus15.xml",
       "新浪国内要闻"
+    ],
+    [
+      "http://sspai.com/feed",
+      "少数派"
+    ],
+    [
+      "http://feedmaker.kindle4rss.com/feeds/cnbeta.xml",
+      "CnBeta"
     ]
   ],
   "DynamicTitle": true,
