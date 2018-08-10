@@ -1,7 +1,8 @@
 # RssToKindle
 个性化抓取RSS新闻，并推送到Kindle<br/>
-<img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/RssToKindle/master/Images/screenshot1.png" />
-<img height="400" width="300" src="https://raw.githubusercontent.com/Azure99/RssToKindle/master/Images/screenshot2.png" />
+<img height="300" width="225" src="https://raw.githubusercontent.com/Azure99/RssToKindle/master/Images/screenshot1.png" />
+<img height="300" width="225" src="https://raw.githubusercontent.com/Azure99/RssToKindle/master/Images/screenshot2.png" />
+<img height="300" width="225" src="https://raw.githubusercontent.com/Azure99/RssToKindle/master/Images/screenshot3.png" />
 
 # 安装
 1. 根据[微软官方教程](https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial)安装.netcore sdk<br/>
@@ -11,7 +12,7 @@ git clone https://github.com/Azure99/RssToKindle.git
 cd RssToKindle/RssToKindle
 dotnet run
 ```
-您可以在screen中启动服务以使其不被关闭，先运行命令[Screen](http://man.linuxde.net/screen) -S SinaNews
+您可以在screen中启动服务以使其不被关闭，先运行命令[Screen](http://man.linuxde.net/screen) -S RssToKindle
 
 # 首次使用
 您可以先启动一次程序，它会自动创建配置模板。<br/>
@@ -23,6 +24,7 @@ dotnet run
 <b>SendTime</b>，每天推送新闻的时间，二十四小时制<br/>
 
 <b>RssUrls</b>，新闻的RSS地址以及名称，这是一个二维数组，存放Rss地址和名称，用于个性化推送内容。<br/>
+目前支持: 知乎日报、新浪新闻、中国日报:专栏、少数派、CnBeta、南方周末、简书<br/>
 
 <b>DynamicTitle</b>，发送邮件时使用动态标题，一定程度上防止被当做垃圾邮件<br/>
 
