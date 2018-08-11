@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using System.Text;
+using HtmlAgilityPack;
 using RssToKindle.Utils;
 
 namespace RssToKindle.Parser
@@ -27,8 +28,11 @@ namespace RssToKindle.Parser
             }
             else if (url.IndexOf("www.cnbeta.com") != -1)//CnBeta
             {
-                return GeneralParse(html, "//div[@class='article-summary']") +
-                    GeneralParse(html, "//div[@class='article-content']");
+                return GeneralParse(html, "//div[@class='article-summary']|//div[@class='article-content']");
+            }
+            else if(url.IndexOf("hot.cnbeta.com") != -1)//CnBeta-hot
+            {
+                return GeneralParse(html, "//div[@class='article-summary']|//div[@class='article-content']");
             }
             else if (url.IndexOf("www.infzm.com") != -1)//南方周末
             {
@@ -51,16 +55,20 @@ namespace RssToKindle.Parser
             HtmlDocument hDoc = new HtmlDocument();
             hDoc.LoadHtml(html);
 
-            HtmlNode node = hDoc.DocumentNode.SelectSingleNode(xpath);
+            StringBuilder sb = new StringBuilder();
 
-            HtmlHelper.RemoveNoTextNode(node);
-            HtmlHelper.RemoveTags(node, "img");
-            HtmlHelper.RemoveTags(node, "script");
-            HtmlHelper.RemoveTags(node, "button");
+            HtmlNodeCollection nodes = hDoc.DocumentNode.SelectNodes(xpath);
+            foreach(HtmlNode node in nodes)
+            {
+                HtmlHelper.RemoveNoTextNode(node);
+                HtmlHelper.RemoveTags(node, "img");
+                HtmlHelper.RemoveTags(node, "script");
+                HtmlHelper.RemoveTags(node, "button");
 
-            string content = node.InnerHtml;
+                sb.AppendLine("<div>" + node.InnerHtml + "</div>");
+            }
 
-            return content;
+            return sb.ToString();
         }
 
         private static string GeneralParse(string html)
