@@ -56,7 +56,6 @@ namespace RssToKindle.Controller
             sb.AppendLine("</html>");
 
             string page = sb.ToString();
-            page = Regex.Replace(page, @"<img[^>]*>", "");//去除图片
 
             return page;
         }

@@ -47,7 +47,15 @@ namespace RssToKindle.Parser
             hDoc.LoadHtml(html);
 
             HtmlNode node = hDoc.DocumentNode.SelectSingleNode(xpath);
+
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
             HtmlHelper.RemoveNoTextNode(node);
+            HtmlHelper.RemoveTags(node, "img");
+            HtmlHelper.RemoveTags(node, "script");
+            HtmlHelper.RemoveTags(node, "button");
+            sw.Stop();
+            System.Console.WriteLine(sw.ElapsedMilliseconds);
 
             string content = node.InnerHtml;
 
