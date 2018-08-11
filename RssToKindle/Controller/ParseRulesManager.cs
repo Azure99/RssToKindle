@@ -50,6 +50,11 @@ namespace RssToKindle.Controller
             }
         }
 
+        /// <summary>
+        /// 获取适合Url的规则
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns>xPath规则</returns>
         public static string GetRule(string url)
         {
             foreach(ArticleParseRule rule in _rules)
@@ -62,6 +67,10 @@ namespace RssToKindle.Controller
             return "";
         }
 
+        /// <summary>
+        /// 获取默认新闻页面解析规则
+        /// </summary>
+        /// <returns></returns>
         private static ArticleParseRule[] GetDefaultRules()
         {
             return new ArticleParseRule[] {

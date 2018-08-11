@@ -11,7 +11,7 @@ namespace RssToKindle.Parser
         {
             string xPath = ParseRulesManager.GetRule(url);
 
-            if (!string.IsNullOrEmpty(xPath)) 
+            if (!string.IsNullOrEmpty(xPath)) //判断是否匹配到规则
             {
                 return GeneralParse(html, xPath);
             }

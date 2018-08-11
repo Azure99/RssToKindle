@@ -7,6 +7,11 @@ namespace RssToKindle.Utils
 {
     static class HtmlHelper
     {
+        /// <summary>
+        /// 获取html页面纯文本
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
         public static string GetPureText(string html)
         {
             HtmlDocument hDoc = new HtmlDocument();
@@ -15,11 +20,20 @@ namespace RssToKindle.Utils
             return hDoc.DocumentNode.InnerText;
         }
 
+        /// <summary>
+        /// 移除两行以上的换行符
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static string RemoveMultiplyNewLine(string str)
         {
             return str.Replace("\r\n\r\n", "").Replace("\r\r", "").Replace("\n\n", "");
         }
 
+        /// <summary>
+        /// 移除无文本的节点
+        /// </summary>
+        /// <param name="node"></param>
         public static void RemoveNoTextNode(HtmlNode node)
         {
             List<HtmlNode> noTextNodes = new List<HtmlNode>();
@@ -46,7 +60,10 @@ namespace RssToKindle.Utils
                 FindAllNoTextNode(child, noTextNodes);
             }
         }
-
+        /// <summary>
+        /// 移除所有特定标签
+        /// </summary>
+        /// <param name="tagName">标签名</param>
         public static void RemoveTags(HtmlNode node, string tagName)
         {
             List<HtmlNode> nodes = new List<HtmlNode>();

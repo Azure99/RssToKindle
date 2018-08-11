@@ -64,7 +64,7 @@ namespace RssToKindle.Controller
             DateTime nowTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
             DateTime sendTime = DateTime.Parse(config.SendTime);
 
-            if (nowDate > lastDate && nowTime > sendTime)
+            if (nowDate > lastDate && nowTime > sendTime)//检查是否到了推送时间
             {
                 GetNewsAndSendToKindle();
             }
@@ -142,7 +142,7 @@ namespace RssToKindle.Controller
             foreach (NewsHeader header in headers)
             {
                 count++;
-                if (count % 10 == 0)
+                if (count % 5 == 0)//每爬去5个新闻提示一次
                 {
                     LogManager.WriteLine(string.Format("<{0}> items done...", count));
                 }
@@ -199,7 +199,7 @@ namespace RssToKindle.Controller
                         config.EnableSSL);
 
                     string title = "convert";
-                    if (ConfigManager.Config.DynamicTitle)
+                    if (ConfigManager.Config.DynamicTitle)//使用动态标题
                     {
                         title = Path.GetFileNameWithoutExtension(path) + new Random().Next(0, 99);
                     }
