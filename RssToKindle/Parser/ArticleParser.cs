@@ -27,7 +27,11 @@ namespace RssToKindle.Parser
             }
             else if (url.IndexOf("www.cnbeta.com") != -1)//CnBeta
             {
-                return GeneralParse(html, "//div[@class='cnbeta-article-body']");
+                return "<div>" +
+                    GeneralParse(html, "//div[@class='article-summary']") +
+                    "</div><div>" + 
+                    GeneralParse(html, "//div[@class='article-content']") +
+                    "</div>";
             }
             else if (url.IndexOf("www.infzm.com") != -1)//南方周末
             {
@@ -48,14 +52,10 @@ namespace RssToKindle.Parser
 
             HtmlNode node = hDoc.DocumentNode.SelectSingleNode(xpath);
 
-            var sw = new System.Diagnostics.Stopwatch();
-            sw.Start();
             HtmlHelper.RemoveNoTextNode(node);
             HtmlHelper.RemoveTags(node, "img");
             HtmlHelper.RemoveTags(node, "script");
             HtmlHelper.RemoveTags(node, "button");
-            sw.Stop();
-            System.Console.WriteLine(sw.ElapsedMilliseconds);
 
             string content = node.InnerHtml;
 
