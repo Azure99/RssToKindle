@@ -38,6 +38,10 @@ namespace RssToKindle.Parser
             {
                 return GeneralParse(html, "//div[@class='show-content-free']");
             }
+            else if (url.IndexOf("www.thepaper.cn") != -1)//澎湃新闻
+            {
+                return GeneralParse(html, "//div[@class='news_txt']");
+            }
 
             return GeneralParse(html);
         }
