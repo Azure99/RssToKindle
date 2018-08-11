@@ -71,8 +71,10 @@ namespace RssToKindle.Controller
             classSb.AppendLine("<p>" + System.DateTime.Now.ToShortDateString() + "</p>");
             classSb.AppendLine("<br/><br/>");
 
+            int count = -1;
             foreach(string name in _dic.Keys)
             {
+                count++;
                 ClassBuilder cb = _dic[name];
 
                 classSb.Append(string.Format("<a href=\"#class{0}\">" +
@@ -87,7 +89,19 @@ namespace RssToKindle.Controller
                     name, 
                     cb.Count));
 
-                indexSb.AppendLine("<a href=\"#main\"><font size=\"5\">返回</font></a><br/>");
+                indexSb.AppendLine("<div>");
+                if (count != 0)
+                {
+                    indexSb.AppendLine(string.Format("<a href=\"#class{0}\">" +
+                        "<font size=\"5\">上个分类</font>" +
+                        "</a>&nbsp;&nbsp;",
+                        count - 1));
+                }
+                indexSb.AppendLine("<a href=\"#main\" style=\"float:center\">" +
+                    "<font size=\"5\">返回</font>" +
+                    "</a>&nbsp;");
+                indexSb.AppendLine("</div>");
+
                 indexSb.AppendLine("<br/>");
                 indexSb.AppendLine(cb.GetIndexHtml());
 
