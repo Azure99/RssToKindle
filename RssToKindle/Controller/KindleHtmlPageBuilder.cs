@@ -87,7 +87,7 @@ namespace RssToKindle.Controller
                     name, 
                     cb.Count));
 
-                //indexSb.AppendLine("<a href=\"#front\"><font size=\"5\">返回</font></a><br/><br/>");
+                indexSb.AppendLine("<a href=\"#main\"><font size=\"5\">返回</font></a><br/>");
                 indexSb.AppendLine("<br/>");
                 indexSb.AppendLine(cb.GetIndexHtml());
 
