@@ -33,7 +33,7 @@ namespace RssToKindle.Controller
         {
             try
             {
-                string json = File.ReadAllText("config.json");
+                string json = File.ReadAllText("Config.json");
                 Config = JsonSerialization.DeSerialize<Config>(json);
             }
             catch (Exception ex)
@@ -53,7 +53,7 @@ namespace RssToKindle.Controller
             try
             {
                 string json = JsonSerialization.Serialize(Config);
-                File.WriteAllText("config.json", json);
+                File.WriteAllText("Config.json", json);
             }
             catch (Exception ex)
             {

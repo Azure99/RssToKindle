@@ -51,6 +51,7 @@ namespace RssToKindle
                 else if (command.ToLower() == "reload config") //重新读入配置文件
                 {
                     ConfigManager.ReadConfig();
+                    ParseRulesManager.ReadRules();
                     LogManager.WriteLine("Reload ok!");
                 }
                 else
