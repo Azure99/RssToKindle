@@ -27,11 +27,8 @@ namespace RssToKindle.Parser
             }
             else if (url.IndexOf("www.cnbeta.com") != -1)//CnBeta
             {
-                return "<div>" +
-                    GeneralParse(html, "//div[@class='article-summary']") +
-                    "</div><div>" + 
-                    GeneralParse(html, "//div[@class='article-content']") +
-                    "</div>";
+                return GeneralParse(html, "//div[@class='article-summary']") +
+                    GeneralParse(html, "//div[@class='article-content']");
             }
             else if (url.IndexOf("www.infzm.com") != -1)//南方周末
             {

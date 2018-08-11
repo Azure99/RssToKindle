@@ -14,7 +14,11 @@ namespace RssToKindle.Model
         public string[][] Rss { get; set; } = {
             new string[2]{ "http://feedmaker.kindle4rss.com/feeds/zhihu-daily.xml", "知乎日报" },
             new string[2]{ "http://feedmaker.kindle4rss.com/feeds/column.chinadaily.xml", "中国日报专栏" },
-            new string[2]{ "http://rss.sina.com.cn/news/china/focus15.xml", "新浪国内要闻" }
+            new string[2]{ "http://rss.sina.com.cn/news/china/focus15.xml", "新浪国内要闻" },
+            new string[2]{ "http://feedmaker.kindle4rss.com/feeds/hot.infzm.com.xml", "南方周末" },
+            new string[2]{ "https://sspai.com/feed", "少数派"},
+            new string[2]{ "http://feedmaker.kindle4rss.com/feeds/jianshu.com.xml", "简书" },
+            new string[2]{ "http://feedmaker.kindle4rss.com/feeds/cnbeta.xml", "CnBeta" }
         };
         /// <summary>
         /// 是否使用动态邮件标题
