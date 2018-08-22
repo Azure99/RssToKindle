@@ -122,6 +122,12 @@ namespace RssToKindle.Controller
             for (int i = 0; i < ConfigManager.Config.Rss.Length; i++)
             {
                 string xmlUrl = ConfigManager.Config.Rss[i][0];
+
+                if(xmlUrl.StartsWith("#"))//使用#暂时屏蔽订阅
+                {
+                    continue;
+                }
+
                 string rssClass = ConfigManager.Config.Rss[i][1];
                 try
                 {

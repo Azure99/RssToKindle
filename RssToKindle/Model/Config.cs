@@ -12,6 +12,7 @@ namespace RssToKindle.Model
         /// 新闻的RSS地址，可自定义感兴趣的内容
         /// </summary>
         public string[][] Rss { get; set; } = {
+            new string[2]{ "#http://example.com/ex.xml", "订阅名称(在url前加#可屏蔽推送)"},
             new string[2]{ "http://feedmaker.kindle4rss.com/feeds/zhihu-daily.xml", "知乎日报" },
             new string[2]{ "http://feedmaker.kindle4rss.com/feeds/column.chinadaily.xml", "中国日报专栏" },
             new string[2]{ "http://rss.sina.com.cn/news/china/focus15.xml", "新浪国内要闻" },
