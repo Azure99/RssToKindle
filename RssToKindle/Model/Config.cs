@@ -18,7 +18,9 @@ namespace RssToKindle.Model
             new string[2]{ "http://feedmaker.kindle4rss.com/feeds/hot.infzm.com.xml", "南方周末" },
             new string[2]{ "https://sspai.com/feed", "少数派"},
             new string[2]{ "http://feedmaker.kindle4rss.com/feeds/jianshu.com.xml", "简书" },
-            new string[2]{ "http://feedmaker.kindle4rss.com/feeds/cnbeta.xml", "CnBeta" }
+            new string[2]{ "http://feedmaker.kindle4rss.com/feeds/cnbeta.xml", "CnBeta" },
+            new string[2]{ "http://feedmaker.kindle4rss.com/feeds/choice.thepaper.xml", "澎湃新闻"},
+            new string[2]{ "http://feedmaker.kindle4rss.com/feeds/group_classicreading.douban.xml", "豆瓣短篇阅读" }
         };
         /// <summary>
         /// 是否使用动态邮件标题

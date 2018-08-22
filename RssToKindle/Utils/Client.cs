@@ -16,13 +16,14 @@ namespace RssToKindle.Utils
             };
         }
 
-        public static string GET(string url, int tryCount = 2)
+        public static string GET(string url, int tryCount = 2) 
         {
             Exception lastEx = new ApplicationException("Cannot get " + url);
             while (tryCount-- > 0)
             {
                 try
                 {
+                    _wc.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.79 Safari/537.36");
                     return _wc.DownloadString(url);
                 }
                 catch (Exception ex)

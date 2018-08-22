@@ -81,7 +81,8 @@ namespace RssToKindle.Controller
                 new ArticleParseRule("cnbeta.com", "//div[@class='article-summary']|//div[@class='article-content']"),//CnBeta
                 new ArticleParseRule("www.infzm.com", "//section[@id='articleContent']"),//南方周末
                 new ArticleParseRule("www.jianshu.com", "//div[@class='show-content-free']"),//简书
-                new ArticleParseRule("www.thepaper.cn", "//div[@class='news_txt']")//澎湃新闻
+                new ArticleParseRule("www.thepaper.cn", "//div[@class='news_txt']"),//澎湃新闻
+                new ArticleParseRule("www.douban.com","//div[@class='topic-richtext']")
             };
         }
     }
